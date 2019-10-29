@@ -156,6 +156,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$allowedEventTypes = GeneralUtility::trimExplode (',', $eventType, 1);
 		if (! empty ($allowedEventTypes)) {
 			$where .= ' AND tx_cal_event.type IN (' . implode (',', $allowedEventTypes) . ')';
+		}		
+		if($this->conf['calendar']){
+			$where .= ' AND tx_cal_event.calendar_id IN (' . $this->conf['calendar'] . ')';
 		}
 		
 		if ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['additionalWhere']) {
